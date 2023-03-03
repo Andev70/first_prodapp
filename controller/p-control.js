@@ -71,16 +71,16 @@ const getAllProfiles = async (req, res) => {
 const getSingleProfile = async (req, res) => {
   try {
     const authID = req.headers.authorization;
-    if(!authID) return res.status(401).json({msg:"authorization failed"})
-    
-    const userToken = jwt.verify(authID,process.env.JWT_SECRET);
-    const userID = userToken.id;
-    const profile = await Profile.findOne({userID:userID});
-    if(!profile) return res.status(404).json({msg:"no user found"});
-    res.status(200).json({profile});
+    if (!authID) return res.status(401).json({ msg: "authorization failed" });
+
+    const userToken = jwt.verify(authID, process.env.JWT_SECRET);
+    const userID= userToken.id;
+    const profile = await Profile.findOne({ userID: userID });
+    if (!profile) return res.status(404).json({ msg: "no user found" });
+    res.status(200).json({ profile });
   } catch (e) {
     console.log(e);
-   res.status(500).json({msg:"error occured"});
+    res.status(500).json({ msg: "error occured" });
   }
 };
 module.exports = { createProfile, getAllProfiles, getSingleProfile };
