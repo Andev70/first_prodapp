@@ -10,7 +10,7 @@ const signup = async (req, res) => {
     const userPass = req.body.password;
     const useridentity = req.body.username;
     const usermail = req.body.email;
-    const alreadyPresent= await User.findOne({ email: usermail });
+    const alreadyPresent = await User.findOne({ email: usermail });
     if (alreadyPresent)
       return res.status(500).json({ msg: "user already present" });
     // check user cred
@@ -18,7 +18,7 @@ const signup = async (req, res) => {
       return res.status(401).json({
         msg: "provide your username password and email",
       });
-    } else if (useridentity=== "" && userPass === "") {
+    } else if (useridentity === "" && userPass === "") {
       res.status(401).json({ msg: "provide username and a password" });
     } else if (useridentity === "" && usermail === "") {
       return res.status(401).json({ msg: "provide your email and name" });
@@ -214,7 +214,7 @@ const login = async (req, res) => {
     });
 
     res.cookie("token", token, { maxAge: 36000000 });
-    res.status(200).json({ msg: ["login successful",id,token] });
+    res.status(200).json({ msg: ["login successful", id, token] });
   } catch (e) {
     console.log(e);
   }
