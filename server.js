@@ -7,7 +7,7 @@ const path = require("path");
 const connectDB = require("./db/connect");
 const users = require("./route/user-route");
 const profiles = require("./route/p-route");
-
+const posts = require("./route/post.route");
 // middlewares
 app.use(cors());
 app.use(express.json());
@@ -35,6 +35,6 @@ const startDB = async () => {
 };
 startDB();
 ////////////////
-
+app.use("/api/v1/posts", posts);
 app.use("/api/v1/users", users);
 app.use("/api/v1/profiles", profiles);
