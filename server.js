@@ -19,7 +19,7 @@ app.use("/create/profile", express.static("./public/add_profile/dist"));
 app.use("/verify", express.static("./public/verify-email/dist"));
 app.use("/weiwo/:id", express.static("./public/media"));
 app.use("/new/password", express.static("./public/reset-password/dist"));
-
+app.use("/post", express.static("./public/add-post"));
 // /////////
 
 const PORT = process.env.PORT || 8080;
