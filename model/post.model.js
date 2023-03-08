@@ -49,10 +49,12 @@ const postSchema = new mongoose.Schema({
     type: Array,
     default: [
       {
+        commenter_name: { type: "String", default: "jhon doe" },
+        commenter_pic: { type: String, default: "no picture provided" },
         comment: "you are a nice person",
         time_stamp: "02-03-2023",
         likes: 0,
-        reply: [],
+        reply: ["this is a demo reply"],
       },
     ],
   },
@@ -62,6 +64,7 @@ const postSchema = new mongoose.Schema({
     required: [true, "username  is required"],
     trim: true,
   },
+  visivility_status: { type: String, default: "public" },
   user_pic: { type: String, required: [true, "profile pic is required"] },
 });
 
