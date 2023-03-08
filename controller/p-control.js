@@ -3,7 +3,9 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { profilePictureUpload } = require("../upload-files/couldinary-uploads");
+const {
+  profilePictureUpload,
+} = require("../middleware/upload-files/couldinary-uploads");
 // create profile
 
 const createProfile = async (req, res) => {
