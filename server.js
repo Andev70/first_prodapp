@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const color = require("colors");
 const cors = require("cors");
 require("dotenv").config();
 const path = require("path");
@@ -27,10 +26,10 @@ const startDB = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => {
-      console.log(`listening to post ${PORT}`.blue);
+      console.log(`listening to post ${PORT}`);
     });
   } catch (e) {
-    console.log(`${e}`.red);
+    console.log(`${e}`);
   }
 };
 startDB();
