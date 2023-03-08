@@ -6,7 +6,8 @@ const jwt = require("jsonwebtoken");
 
 const addPost = async (req, res) => {
   try {
-    //console.log(req.body);
+    console.log(req.body);
+    console.log(req.headers);
     const posts = await Post.create(req.body);
     if (!posts) return res.status(401).json({ msg: "cannot create post" });
 

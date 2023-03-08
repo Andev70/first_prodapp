@@ -3,6 +3,9 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const { profilePictureUpload } = require("../upload-files/couldinary-uploads");
+// create profile
+
 const createProfile = async (req, res) => {
   try {
     const authId = req.headers.authorization;
@@ -25,29 +28,30 @@ const createProfile = async (req, res) => {
     const profile = await Profile.create(req.body);
 
     // uploading files
-    const files = req.files;
-
-    if (files) {
-      const profilePicture = Object.values(files)[0];
-      cloudinary.uploader.upload(
-        profilePicture.tempFilePath,
-        {
-          folder: "profile",
-        },
-        async (err, image) => {
-          if (err) {
-            console.log(err);
-          }
-          // if uploaded
-          const img = image.url;
-          const profileImg = await Profile.findOneAndUpdate(
-            { userID: id },
-            { pic: img }
-          );
-          fs.unlink(profilePicture.tempFilePath, (error) => {});
-        }
-      );
-    }
+    // const files = req.files;
+    //
+    // if (files) {
+    //   const profilePicture = Object.values(files)[0];
+    //   cloudinary.uploader.upload(
+    //     profilePicture.tempFilePath,
+    //     {
+    //       folder: "profile",
+    //     },
+    //     async (err, image) => {
+    //       if (err) {
+    //         console.log(err);
+    //       }
+    //       // if uploaded
+    //       const img = image.url;
+    //       const profileImg = await Profile.findOneAndUpdate(
+    //         { userID: id },
+    //         { pic: img }
+    //       );
+    //       fs.unlink(profilePicture.tempFilePath, (error) => {});
+    //     }
+    //   );
+    // }
+    profilePictureUpload(req, id, Profile);
     // profile sucess fully created
     res.status(201).json("profile created");
   } catch (e) {
@@ -57,6 +61,8 @@ const createProfile = async (req, res) => {
       .json({ msg: [" error occurred", "profile is not ready try again"] });
   }
 };
+
+//  get all the profiles
 const getAllProfiles = async (req, res) => {
   try {
     const profiles = await Profile.find({});
@@ -74,7 +80,7 @@ const getSingleProfile = async (req, res) => {
     if (!authID) return res.status(401).json({ msg: "authorization failed" });
 
     const userToken = jwt.verify(authID, process.env.JWT_SECRET);
-    const userID= userToken.id;
+    const userID = userToken.id;
     const profile = await Profile.findOne({ userID: userID });
     if (!profile) return res.status(404).json({ msg: "no user found" });
     res.status(200).json({ profile });
