@@ -21,6 +21,8 @@ const profilePictureUpload = (request, user, collection) => {
         }
         // if uploaded
         const img = image.url;
+        console.log(img);
+
         const profileImg = await collection.findOneAndUpdate(
           { userID: user },
           { pic: img }

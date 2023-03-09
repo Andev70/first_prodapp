@@ -21,39 +21,45 @@ const postSchema = new mongoose.Schema({
   },
   picture: {
     type: String,
+    default: "empty",
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
+  reactions: {
+    type: Array,
+    default: [
+      {
+        name: "likes",
+        value: 0,
+      },
 
-  hearts: {
-    type: Number,
-    default: 0,
-  },
-  smiley: {
-    type: Number,
-    default: 0,
-  },
-  sad: {
-    type: Number,
-    default: 0,
-  },
+      {
+        name: "happy",
+        value0,
+      },
+      {
+        name: "angry",
+        value: 0,
+      },
+      {
+        name: "sad",
+        value: 0,
+      },
 
-  angry: {
-    type: Number,
-    default: 0,
+      {
+        name: "heart",
+        value: 0,
+      },
+    ],
   },
   comments: {
     type: Array,
     default: [
       {
-        commenter_name: { type: "String", default: "jhon doe" },
-        commenter_pic: { type: String, default: "no picture provided" },
-        comment: "you are a nice person",
+        commenter_name: "empty",
+        commenter_pic: "empty",
+        comment: "empty",
         time_stamp: "02-03-2023",
-        likes: 0,
-        reply: ["this is a demo reply"],
+        comment_likes: 0,
+        comment_reply: ["empty"],
       },
     ],
   },
