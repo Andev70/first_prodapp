@@ -26,33 +26,9 @@ const createProfile = async (req, res) => {
     const user = req.body.username;
     req.body.userID = id;
     req.body.useremail = clientEmail;
+    console.log(req.body);
     // creating profile without images
     const profile = await Profile.create(req.body);
-
-    // uploading files
-    // const files = req.files;
-    //
-    // if (files) {
-    //   const profilePicture = Object.values(files)[0];
-    //   cloudinary.uploader.upload(
-    //     profilePicture.tempFilePath,
-    //     {
-    //       folder: "profile",
-    //     },
-    //     async (err, image) => {
-    //       if (err) {
-    //         console.log(err);
-    //       }
-    //       // if uploaded
-    //       const img = image.url;
-    //       const profileImg = await Profile.findOneAndUpdate(
-    //         { userID: id },
-    //         { pic: img }
-    //       );
-    //       fs.unlink(profilePicture.tempFilePath, (error) => {});
-    //     }
-    //   );
-    // }
     profilePictureUpload(req, id, Profile);
     // profile sucess fully created
     res.status(201).json("profile created");
