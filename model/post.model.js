@@ -7,7 +7,6 @@ const postSchema = new mongoose.Schema({
       true,
       "user id is not found, whithout user id we can't identify the user",
     ],
-    unique: [true, "user auth faild"],
   },
 
   posted_at: {
