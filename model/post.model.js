@@ -33,7 +33,7 @@ const postSchema = new mongoose.Schema({
 
       {
         name: "happy",
-        value0,
+        value: 0,
       },
       {
         name: "angry",
