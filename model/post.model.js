@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 const commentSchema = new mongoose.Schema({
   post_ID: {
     type: mongoose.Schema.Types.ObjectId,
-    required: [true, "which post"],
+    required: [true, "post id is required"],
   },
   commenter_name: {
     type: String,
