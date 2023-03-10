@@ -4,6 +4,7 @@ const moment = require("moment-timezone");
 const commentSchema = new mongoose.Schema({
   post_ID: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "posts",
     required: [true, "post id is required"],
   },
   commenter_name: {
@@ -44,33 +45,27 @@ const postSchema = new mongoose.Schema({
     default: "empty",
   },
   reactions: {
-    type: Array,
-    default: [
+    type: [
       {
-        name: "likes",
-        value: 0,
-      },
-
-      {
-        name: "happy",
-        value: 0,
-      },
-      {
-        name: "angry",
-        value: 0,
-      },
-      {
-        name: "sad",
-        value: 0,
-      },
-
-      {
-        name: "heart",
-        value: 0,
+        name: {
+          type: String,
+          required: true,
+        },
+        value: {
+          type: Number,
+          default: 0,
+        },
       },
     ],
+    default: [
+      { name: "likes", value: 0 },
+      { name: "happy", value: 0 },
+      { name: "angry", value: 0 },
+      { name: "sad", value: 0 },
+      { name: "heart", value: 0 },
+    ],
   },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  comments: [commentSchema],
   share: { type: Number, default: 0 },
   visivility_status: { type: String, default: "public" },
 });
