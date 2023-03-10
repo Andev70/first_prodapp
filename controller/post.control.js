@@ -58,5 +58,17 @@ const createPost = async (req, res) => {
     res.status(500).json({ msg: "error occured" });
   }
 };
+// get a post
+// const getOnePost = async (req, res) => {
+//   try {
+//     const post = await Post.findOne({
+//       _id: "640acf0c7fd0ba457e5aa8a9",
+//     }).populate({ path: "comments" });
+//     if (!post) return res.status(404).json({ msg: "cannot find" });
+//     res.json({ post });
+//   } catch (e) {
+//     console.log(e);
+//     res.json({ msg: "error occured" });
+//   }
 
 module.exports = { createPost };
