@@ -16,7 +16,9 @@ const profilePictureUpload = (request, user, collection) => {
       },
       async (err, image) => {
         if (err) {
-          fs.unlink(profilePicture.tempFilePath, (error) => {});
+          fs.unlink(profilePicture.tempFilePath, (error) => {
+            console.log(error);
+          });
           console.log(err);
         }
         // if uploaded
