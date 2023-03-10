@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const moment = require("moment-timezone");
 // comment schema for better performence
 const commentSchema = new mongoose.Schema({
+  post_ID: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, "which post"],
+  },
   commenter_name: {
     type: String,
     required: [true, "your name is not provided"],
