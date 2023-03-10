@@ -3,7 +3,8 @@ const moment = require("moment-timezone");
 const profileSchema = new mongoose.Schema({
   useremail: { type: String, required: [true, "need your email"] },
   userID: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
     required: [
       true,
       "user id is not found, whithout user id we can't identify the user",
@@ -24,7 +25,7 @@ const profileSchema = new mongoose.Schema({
     maxlength: [60, "bio should be short and sweet"],
     trim: true,
   },
-  friends: { type: Array, default: ["anupal"] },
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "Friend" }],
   website: {
     type: String,
   },

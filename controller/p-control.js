@@ -43,7 +43,7 @@ const createProfile = async (req, res) => {
 //  get all the profiles
 const getAllProfiles = async (req, res) => {
   try {
-    const profiles = await Profile.find({});
+    const profiles = await Profile.find({}).populate({ path: "userID" });
     res.status(200).json({ profiles });
   } catch (e) {
     console.log(e);

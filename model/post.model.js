@@ -24,11 +24,9 @@ const commentSchema = new mongoose.Schema({
 
 const postSchema = new mongoose.Schema({
   userID: {
-    type: String,
-    required: [
-      true,
-      "user id is not found, whithout user id we can't identify the user",
-    ],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+    required: [true, "user reference  is needed"],
   },
 
   posted_at: {
@@ -74,13 +72,7 @@ const postSchema = new mongoose.Schema({
   },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   share: { type: Number, default: 0 },
-  username: {
-    type: String,
-    required: [true, "username  is required"],
-    trim: true,
-  },
   visivility_status: { type: String, default: "public" },
-  user_pic: { type: String, required: [true, "profile pic is required"] },
 });
 // adding index for quering
 postSchema.index({ userID: 1 });
