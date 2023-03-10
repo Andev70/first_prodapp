@@ -1,5 +1,23 @@
 const mongoose = require("mongoose");
 const moment = require("moment-timezone");
+// comment schema for better performence
+const commentSchema = new mongoose.Schema({
+  commenter_name: {
+    type: String,
+    required: [true, "your name is not provided"],
+    trim: true,
+  },
+  commenter_pic: {
+    type: String,
+    default: "empty",
+  },
+
+  comment: { type: String, required: [true, "comment is empty"] },
+  time_stamp: { type: Date, default: Date.now() },
+  comment_likes: { type: Number, default: 0 },
+  comment_reply: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
+});
+
 const postSchema = new mongoose.Schema({
   userID: {
     type: String,
@@ -11,7 +29,7 @@ const postSchema = new mongoose.Schema({
 
   posted_at: {
     type: Date,
-    default: moment().tz("Asia/Kolkata").format("DD-MM-YYYY hh:mm:ss a"),
+    default: Date.now(),
   },
 
   caption: {
@@ -50,19 +68,7 @@ const postSchema = new mongoose.Schema({
       },
     ],
   },
-  comments: {
-    type: Array,
-    default: [
-      {
-        commenter_name: "empty",
-        commenter_pic: "empty",
-        comment: "empty",
-        time_stamp: "02-03-2023",
-        comment_likes: 0,
-        comment_reply: ["empty"],
-      },
-    ],
-  },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   share: { type: Number, default: 0 },
   username: {
     type: String,
@@ -72,5 +78,9 @@ const postSchema = new mongoose.Schema({
   visivility_status: { type: String, default: "public" },
   user_pic: { type: String, required: [true, "profile pic is required"] },
 });
-
-module.exports = mongoose.model("posts", postSchema);
+// adding index for quering
+postSchema.index({ userID: 1 });
+// set schemas
+const Post = mongoose.model("posts", postSchema);
+const Comment = mongoose.model("Comment", commentSchema);
+module.exports = { Post, Comment };

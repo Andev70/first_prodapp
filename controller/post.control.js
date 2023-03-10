@@ -1,4 +1,4 @@
-const Post = require("../model/post.model");
+const { Post } = require("../model/post.model");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config();
