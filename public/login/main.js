@@ -1,11 +1,10 @@
 import "./style.css";
 // selected elems
+
 const email = document.querySelector(".email");
 const password = document.querySelector(".password");
 const signIn = document.querySelector(".login");
 //const conditions = document.querySelector(".condition");
-console.log(email.value);
-console.log(password.value);
 const alerts = document.querySelector(".msgs");
 // functions
 
